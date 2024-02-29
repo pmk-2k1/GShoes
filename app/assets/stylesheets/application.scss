@@ -153,7 +153,6 @@ section#idx {
               position: relative;
               display: flex;
               align-items: center;
-
             }
           }
         }
@@ -226,6 +225,8 @@ section#idx {
           }
 
           .cartItemRight {
+            width: 100%;
+
             .cartItemName {
               font-size: 16px;
               font-weight: 700;
@@ -284,18 +285,13 @@ section#idx {
                 background-color: #f6c90e;
                 transition: .2s;
                 user-select: none;
+                float: right;
 
                 input[type="submit"] {
                   background: none;
                   border: none;
-                  
-                }
 
-              //   img {
-              //     width: 16px;
-              //     height: 16px;
-              //     margin-bottom: 6px;
-              //   }
+                }
               }
             }
           }

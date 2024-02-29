@@ -25,10 +25,11 @@ class CartController < ApplicationController
     #   end
     # end
   end
+
   def add_quantity
-    @product = Product.find_by(id: params[:id])
-    quantity = params[:quantity].to_i
-    current_orderable = @cart.orderables.find_by(product_id: @product.id)
+    # @product = Product.find_by(id: params[:id])
+    # quantity = params[:quantity].to_i
+    current_orderable = @cart.orderables.find(params[:id])
     current_orderable.quantity += 1
     # current_orderable.save
     current_orderable.update(quantity:)
@@ -62,5 +63,4 @@ class CartController < ApplicationController
     #   end
     # end
   end
-
 end

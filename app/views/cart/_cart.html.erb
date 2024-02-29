@@ -1,0 +1,14 @@
+<div class="cart">
+  <%=image_tag "nike"%>
+  <%= turbo_frame_tag "cart" do %>
+    <% if @cart.orderables.count > 0 %>
+      <%= render "cart/orderables" %>
+    <% else %>
+      <div class="title">
+        <div class="your-cart">Your cart</div>
+        <div class="total-price"><%=number_to_currency(@cart.total)%></div>
+      </div>
+      <p>Your cart is empty</p>
+    <% end %>
+  <% end %>
+</div>

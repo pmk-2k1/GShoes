@@ -1,0 +1,42 @@
+<div class="title">
+  <div class="your-cart">Your cart</div>
+  <div class="total-price"><%=number_to_currency(@cart.total)%></div>
+</div>
+<div class="list-cart">
+  <% @cart.orderables.each do |orderable| %>
+    <div class="cart-detail">
+      <% product = orderable.product %>
+      <div class="cartItemLeft">
+        <div class="cartItemImage">
+          <div class="cartImage">
+            <%=image_tag(orderable.product.image.url) %>
+          </div>
+        </div>
+      </div>
+      <div class="cartItemRight">
+        <div class="cartItemName"><%= product.name%></div>
+        <div class="cartItemPrice"><%=number_to_currency(product.price)%></div>
+        <div class="cartItemAction">
+          <div class="cartItemCount">
+            <%= form_with(url: cart_reduce_quantity_path) do |form| %>
+              <%= form.submit "-", class: "cartItemButton"%>
+            <%end%>
+            <div class="cartItemNumber"><%= orderable.quantity%></div>
+            <%= form_with(url: cart_add_quantity_path) do |form| %>
+              <%= form.submit "+", class: "cartItemButton"%>
+            <%end%>
+          </div>
+          <div class="cartItemRemove">
+            <%= form_with(url: cart_remove_path) do |form| %>
+              <%= form.hidden_field :id, value: orderable.id %>
+              <div class="cartItemRemove">
+                <%= form.submit 'x'%>
+              </div>
+            <% end %>
+          </div>
+          <%# <%= f.submit "X" %>
+        </div>
+      </div>
+    </div>
+  <%end%>
+</div>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Video</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="wave_on">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+          <path fill="#F6C90E" fill-opacity="1" d="M0,64L1440,224L1440,320L0,320Z"></path>
+        </svg>
+      </div>
+      <main>
+        <section id="idx">
+          <div class="shoes">
+            <%= yield %>
+            <%# <%= render partial: "cart/cart" if @render_cart %> 
+          </div>
+        </section>
+      </main>
+      <div class="wave">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+          <path fill="#F6C90E" fill-opacity="1" d="M0,64L1440,224L1440,320L0,320Z"></path>
+        </svg>
+      </div>
+    </div>
+  </body>
+</html>

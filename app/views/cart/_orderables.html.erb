@@ -19,31 +19,31 @@
           <div class="cartItemPrice"><%=number_to_currency(product.price)%></div>
           <div class="cartItemAction">
             <div class="cartItemCount">
-              <%= form_with(url: cart_reduce_quantity_path) do |form| %>
+              <%= form_with(url: cart_reduce_quantity_path(orderable.id)) do |form| %>
                 <%= form.submit "-", class: "cartItemButton"%>
               <%end%>
               <div class="cartItemNumber"><%= orderable.quantity%></div>
-              <%= form_with(url: cart_add_quantity_path()) do |form| %>
+              <%= form_with(url: cart_add_quantity_path(orderable.id)) do |form| %>
                 <%= form.submit "+", class: "cartItemButton"%>
-              <%end%>
-            </div>
-            <div class="cartItemRemove">
-              <%= form_with(url: cart_remove_path) do |form| %>
-                <%= form.hidden_field :id, value: orderable.id %>
-                <div class="cartItemRemove">
-                  <%= form.submit "x", id: "cart-#{product.id}"%>
-                </div>
-              <% end %>
+                <%end%>
+              </div>
+              <div class="cartItemRemove">
+                <%= form_with(url: cart_remove_path) do |form| %>
+                  <%= form.hidden_field :id, value: orderable.id %>
+                  <div class="cartItemRemove">
+                    <%= form.submit "x", id: "cart-#{product.id}"%>
+                  </div>
+                <% end %>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    <%end%>
-  </div>
-<% else %>
-  <div class="title">
-    <div class="your-cart">Your cart</div>
-    <div class="total-price"><%=number_to_currency(@cart.total)%></div>
-  </div>
-  <p>Your cart is empty</p>
-<% end %>
+      <%end%>
+    </div>
+  <% else %>
+    <div class="title">
+      <div class="your-cart">Your cart</div>
+      <div class="total-price"><%=number_to_currency(@cart.total)%></div>
+    </div>
+    <p>Your cart is empty</p>
+  <% end %>

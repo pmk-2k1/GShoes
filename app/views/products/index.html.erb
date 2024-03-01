@@ -14,7 +14,7 @@
           <%= form_with(url: cart_add_path) do |form|%>
             <%= form.hidden_field :id, value: product.id %>
             <%= form.number_field :quantity, value: 1, class: "quantity" %>
-            <%= form.submit "ADD TO CART", class: "add-cart addcart"%>
+            <%= form.submit "ADD TO CART", class: "add-cart", id: "button-cart-#{product.id}"%>
           <% end%>
         </div>
       </div>
@@ -22,8 +22,3 @@
   </div>
 </div>
 <%= render "cart/cart" %>
-<script>
-  document.getElementsByClassName("addcart").onclick = function() {
-    document.getElementsByClassName("addcart").innerHTML = "AVAILABLE IN CART";
-  };
-</script>

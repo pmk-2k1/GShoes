@@ -1,12 +1,12 @@
 databases:
   - name: GShoes_production
     databaseName: GShoes
-    user: mysite
+    user: GShoes
     plan: free
 
 services:
   - type: web
-    name: mysite
+    name: GShoes
     runtime: ruby
     plan: free
     buildCommand: "./bin/render-build.sh"

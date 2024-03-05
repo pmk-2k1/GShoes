@@ -34663,3 +34663,1233 @@ Processing by ProductsController#index as HTML
 Completed 200 OK in 17ms (Views: 15.2ms | ActiveRecord: 0.3ms | Allocations: 19349)
 
 
+Started GET "/" for 127.0.0.1 at 2024-03-02 05:28:11 +0700
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#index as HTML
+  [1m[36mCart Load (0.2ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  Rendering layout layouts/application.html.erb
+  Rendering products/index.html.erb within layouts/application
+  [1m[36mProduct Load (1.0ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/views/products/index.html.erb:5
+  [1m[36mOrderable Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.3ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 19.4ms | Allocations: 8475)
+  Rendered cart/_cart.html.erb (Duration: 20.8ms | Allocations: 9200)
+  Rendered products/index.html.erb within layouts/application (Duration: 178.2ms | Allocations: 58773)
+  Rendered layout layouts/application.html.erb (Duration: 190.9ms | Allocations: 73064)
+Completed 200 OK in 216ms (Views: 190.3ms | ActiveRecord: 4.1ms | Allocations: 85772)
+
+
+Started POST "/cart/add" for 127.0.0.1 at 2024-03-02 05:28:13 +0700
+Processing by CartController#add as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "id"=>"2", "quantity"=>"1", "commit"=>"ADD TO CART"}
+  [1m[36mCart Load (0.2ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:7:in `add'
+  [1m[36mOrderable Load (0.2ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ? AND "orderables"."product_id" = ? LIMIT ?[0m  [["cart_id", 2], ["product_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:9:in `add'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:15:in `add'
+  [1m[36mOrderable Create (0.4ms)[0m  [1m[32mINSERT INTO "orderables" ("product_id", "cart_id", "quantity", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["product_id", 2], ["cart_id", 2], ["quantity", 1], ["created_at", "2024-03-01 22:28:13.250372"], ["updated_at", "2024-03-01 22:28:13.250372"]]
+  ↳ app/controllers/cart_controller.rb:15:in `add'
+  [1m[36mTRANSACTION (7.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:15:in `add'
+Redirected to http://127.0.0.1:3000/cart/add
+Completed 302 Found in 35ms (ActiveRecord: 8.8ms | Allocations: 9919)
+
+
+Started GET "/cart/add" for 127.0.0.1 at 2024-03-02 05:28:13 +0700
+  
+ActionController::RoutingError (No route matches [GET] "/cart/add"):
+  
+Started GET "/" for 127.0.0.1 at 2024-03-02 05:28:13 +0700
+Processing by ProductsController#index as HTML
+  [1m[36mCart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  Rendering layout layouts/application.html.erb
+  Rendering products/index.html.erb within layouts/application
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/views/products/index.html.erb:5
+  [1m[36mOrderable Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.1ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 9.0ms | Allocations: 4831)
+  Rendered cart/_cart.html.erb (Duration: 9.5ms | Allocations: 5203)
+  Rendered products/index.html.erb within layouts/application (Duration: 23.5ms | Allocations: 19809)
+  Rendered layout layouts/application.html.erb (Duration: 27.1ms | Allocations: 21969)
+Completed 200 OK in 29ms (Views: 27.1ms | ActiveRecord: 0.8ms | Allocations: 23058)
+
+
+Started POST "/cart/add" for 127.0.0.1 at 2024-03-02 05:28:15 +0700
+Processing by CartController#add as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "id"=>"4", "quantity"=>"1", "commit"=>"ADD TO CART"}
+  [1m[36mCart Load (0.3ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:7:in `add'
+  [1m[36mOrderable Load (0.3ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ? AND "orderables"."product_id" = ? LIMIT ?[0m  [["cart_id", 2], ["product_id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:9:in `add'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:15:in `add'
+  [1m[36mOrderable Create (0.9ms)[0m  [1m[32mINSERT INTO "orderables" ("product_id", "cart_id", "quantity", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["product_id", 4], ["cart_id", 2], ["quantity", 1], ["created_at", "2024-03-01 22:28:15.788787"], ["updated_at", "2024-03-01 22:28:15.788787"]]
+  ↳ app/controllers/cart_controller.rb:15:in `add'
+  [1m[36mTRANSACTION (7.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:15:in `add'
+Redirected to http://127.0.0.1:3000/cart/add
+Completed 302 Found in 34ms (ActiveRecord: 9.4ms | Allocations: 4218)
+
+
+Started GET "/cart/add" for 127.0.0.1 at 2024-03-02 05:28:15 +0700
+  
+ActionController::RoutingError (No route matches [GET] "/cart/add"):
+  
+Started GET "/" for 127.0.0.1 at 2024-03-02 05:28:15 +0700
+Processing by ProductsController#index as HTML
+  [1m[36mCart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  Rendering layout layouts/application.html.erb
+  Rendering products/index.html.erb within layouts/application
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/views/products/index.html.erb:5
+  [1m[36mOrderable Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.1ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 12.3ms | Allocations: 5949)
+  Rendered cart/_cart.html.erb (Duration: 13.1ms | Allocations: 6320)
+  Rendered products/index.html.erb within layouts/application (Duration: 36.3ms | Allocations: 20734)
+  Rendered layout layouts/application.html.erb (Duration: 39.0ms | Allocations: 22888)
+Completed 200 OK in 41ms (Views: 38.5ms | ActiveRecord: 0.9ms | Allocations: 23840)
+
+
+Started POST "/cart/495/add_quantity" for 127.0.0.1 at 2024-03-02 05:28:17 +0700
+Processing by CartController#add_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"+", "id"=>"495"}
+  [1m[36mCart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.3ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 495], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:22:in `add_quantity'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mCACHE Cart Load (0.0ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Update (0.4ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 2], ["updated_at", "2024-03-01 22:28:17.370035"], ["id", 495]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mTRANSACTION (7.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.1ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 18.3ms | Allocations: 6042)
+  Rendered cart/_cart.html.erb (Duration: 21.3ms | Allocations: 6896)
+Completed 200 OK in 50ms (Views: 22.2ms | ActiveRecord: 9.0ms | Allocations: 13589)
+
+
+Started POST "/cart/495/add_quantity" for 127.0.0.1 at 2024-03-02 05:28:17 +0700
+Processing by CartController#add_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"+", "id"=>"495"}
+  [1m[36mCart Load (0.5ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.4ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 495], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:22:in `add_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mCACHE Cart Load (0.0ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Update (0.5ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 3], ["updated_at", "2024-03-01 22:28:17.695850"], ["id", 495]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mTRANSACTION (7.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.2ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 15.0ms | Allocations: 5791)
+  Rendered cart/_cart.html.erb (Duration: 16.7ms | Allocations: 6480)
+Completed 200 OK in 49ms (Views: 16.3ms | ActiveRecord: 9.6ms | Allocations: 11501)
+
+
+Started POST "/cart/495/add_quantity" for 127.0.0.1 at 2024-03-02 05:28:18 +0700
+Processing by CartController#add_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"+", "id"=>"495"}
+  [1m[36mCart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.1ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 495], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:22:in `add_quantity'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mCACHE Cart Load (0.0ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Update (0.2ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 4], ["updated_at", "2024-03-01 22:28:18.110895"], ["id", 495]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mTRANSACTION (6.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.1ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 9.2ms | Allocations: 5789)
+  Rendered cart/_cart.html.erb (Duration: 10.2ms | Allocations: 6473)
+Completed 200 OK in 26ms (Views: 10.3ms | ActiveRecord: 7.5ms | Allocations: 11314)
+
+
+Started POST "/cart/496/add_quantity" for 127.0.0.1 at 2024-03-02 05:28:18 +0700
+Processing by CartController#add_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"+", "id"=>"496"}
+  [1m[36mCart Load (0.4ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.3ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 496], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:22:in `add_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mCACHE Cart Load (0.0ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Update (0.4ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 2], ["updated_at", "2024-03-01 22:28:19.029525"], ["id", 496]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mTRANSACTION (7.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.2ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 13.7ms | Allocations: 5789)
+  Rendered cart/_cart.html.erb (Duration: 18.1ms | Allocations: 6473)
+Completed 200 OK in 53ms (Views: 18.2ms | ActiveRecord: 10.3ms | Allocations: 11303)
+
+
+Started POST "/cart/496/add_quantity" for 127.0.0.1 at 2024-03-02 05:28:19 +0700
+Processing by CartController#add_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"+", "id"=>"496"}
+  [1m[36mCart Load (0.4ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.3ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 496], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:22:in `add_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mCACHE Cart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Update (0.4ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 3], ["updated_at", "2024-03-01 22:28:19.366731"], ["id", 496]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mTRANSACTION (7.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.1ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 15.5ms | Allocations: 5789)
+  Rendered cart/_cart.html.erb (Duration: 18.6ms | Allocations: 6473)
+Completed 200 OK in 54ms (Views: 18.8ms | ActiveRecord: 9.6ms | Allocations: 11306)
+
+
+Started POST "/cart/496/add_quantity" for 127.0.0.1 at 2024-03-02 05:28:19 +0700
+Processing by CartController#add_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"+", "id"=>"496"}
+  [1m[36mCart Load (0.3ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.5ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 496], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:22:in `add_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mCACHE Cart Load (0.0ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Update (0.8ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 4], ["updated_at", "2024-03-01 22:28:19.710591"], ["id", 496]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mTRANSACTION (7.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.5ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 18.1ms | Allocations: 5789)
+  Rendered cart/_cart.html.erb (Duration: 20.1ms | Allocations: 6473)
+Completed 200 OK in 56ms (Views: 19.7ms | ActiveRecord: 10.5ms | Allocations: 11320)
+
+
+Started POST "/cart/495/reduce_quantity" for 127.0.0.1 at 2024-03-02 05:28:20 +0700
+Processing by CartController#reduce_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"-", "id"=>"495"}
+  [1m[36mCart Load (0.4ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.3ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 495], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:30:in `reduce_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mCACHE Cart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mOrderable Update (0.4ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 3], ["updated_at", "2024-03-01 22:28:20.906039"], ["id", 495]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mTRANSACTION (9.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mOrderable Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.1ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 18.7ms | Allocations: 5789)
+  Rendered cart/_cart.html.erb (Duration: 21.2ms | Allocations: 6473)
+Completed 200 OK in 56ms (Views: 20.5ms | ActiveRecord: 11.9ms | Allocations: 11318)
+
+
+Started POST "/cart/495/reduce_quantity" for 127.0.0.1 at 2024-03-02 05:28:21 +0700
+Processing by CartController#reduce_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"-", "id"=>"495"}
+  [1m[36mCart Load (0.4ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.4ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 495], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:30:in `reduce_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mCACHE Cart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mOrderable Update (0.8ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 2], ["updated_at", "2024-03-01 22:28:21.202734"], ["id", 495]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mTRANSACTION (8.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mOrderable Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.2ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 24.5ms | Allocations: 5789)
+  Rendered cart/_cart.html.erb (Duration: 27.3ms | Allocations: 6473)
+Completed 200 OK in 70ms (Views: 26.9ms | ActiveRecord: 11.7ms | Allocations: 11318)
+
+
+Started POST "/cart/495/reduce_quantity" for 127.0.0.1 at 2024-03-02 05:28:21 +0700
+Processing by CartController#reduce_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"-", "id"=>"495"}
+  [1m[36mCart Load (0.4ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.3ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 495], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:30:in `reduce_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mCACHE Cart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mOrderable Update (0.7ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 1], ["updated_at", "2024-03-01 22:28:21.521831"], ["id", 495]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mTRANSACTION (8.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mOrderable Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.3ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 35.4ms | Allocations: 5789)
+  Rendered cart/_cart.html.erb (Duration: 41.0ms | Allocations: 6473)
+Completed 200 OK in 87ms (Views: 40.9ms | ActiveRecord: 12.5ms | Allocations: 11324)
+
+
+Started POST "/cart/495/reduce_quantity" for 127.0.0.1 at 2024-03-02 05:28:21 +0700
+Processing by CartController#reduce_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"-", "id"=>"495"}
+  [1m[36mCart Load (0.3ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.4ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 495], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:30:in `reduce_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:35:in `reduce_quantity'
+  [1m[36mOrderable Destroy (0.8ms)[0m  [1m[31mDELETE FROM "orderables" WHERE "orderables"."id" = ?[0m  [["id", 495]]
+  ↳ app/controllers/cart_controller.rb:35:in `reduce_quantity'
+  [1m[36mTRANSACTION (17.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:35:in `reduce_quantity'
+  [1m[36mOrderable Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.3ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 27.1ms | Allocations: 3683)
+  Rendered cart/_cart.html.erb (Duration: 31.3ms | Allocations: 4367)
+Completed 200 OK in 68ms (Views: 31.0ms | ActiveRecord: 20.1ms | Allocations: 7275)
+
+
+Started POST "/cart/496/reduce_quantity" for 127.0.0.1 at 2024-03-02 05:28:22 +0700
+Processing by CartController#reduce_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"-", "id"=>"496"}
+  [1m[36mCart Load (0.3ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.4ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 496], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:30:in `reduce_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mCACHE Cart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mOrderable Update (0.4ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 3], ["updated_at", "2024-03-01 22:28:23.001258"], ["id", 496]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mTRANSACTION (7.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mOrderable Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.1ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 10.1ms | Allocations: 3683)
+  Rendered cart/_cart.html.erb (Duration: 12.0ms | Allocations: 4367)
+Completed 200 OK in 48ms (Views: 12.3ms | ActiveRecord: 9.3ms | Allocations: 9212)
+
+
+Started POST "/cart/496/reduce_quantity" for 127.0.0.1 at 2024-03-02 05:28:23 +0700
+Processing by CartController#reduce_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"-", "id"=>"496"}
+  [1m[36mCart Load (0.4ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.4ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 496], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:30:in `reduce_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mCACHE Cart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mOrderable Update (0.5ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 2], ["updated_at", "2024-03-01 22:28:23.449629"], ["id", 496]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mTRANSACTION (7.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mOrderable Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.1ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 13.2ms | Allocations: 3684)
+  Rendered cart/_cart.html.erb (Duration: 15.2ms | Allocations: 4372)
+Completed 200 OK in 60ms (Views: 14.9ms | ActiveRecord: 10.0ms | Allocations: 9232)
+
+
+Started POST "/cart/496/reduce_quantity" for 127.0.0.1 at 2024-03-02 05:28:23 +0700
+Processing by CartController#reduce_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"-", "id"=>"496"}
+  [1m[36mCart Load (0.3ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.3ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 496], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:30:in `reduce_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mCACHE Cart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mOrderable Update (0.7ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 1], ["updated_at", "2024-03-01 22:28:23.739322"], ["id", 496]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mTRANSACTION (9.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mOrderable Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.4ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 28.2ms | Allocations: 3683)
+  Rendered cart/_cart.html.erb (Duration: 33.3ms | Allocations: 4371)
+Completed 200 OK in 79ms (Views: 32.7ms | ActiveRecord: 13.2ms | Allocations: 9223)
+
+
+Started POST "/cart/496/reduce_quantity" for 127.0.0.1 at 2024-03-02 05:28:24 +0700
+Processing by CartController#reduce_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"-", "id"=>"496"}
+  [1m[36mCart Load (0.3ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.3ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 496], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:30:in `reduce_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:35:in `reduce_quantity'
+  [1m[36mOrderable Destroy (0.9ms)[0m  [1m[31mDELETE FROM "orderables" WHERE "orderables"."id" = ?[0m  [["id", 496]]
+  ↳ app/controllers/cart_controller.rb:35:in `reduce_quantity'
+  [1m[36mTRANSACTION (12.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:35:in `reduce_quantity'
+  [1m[36mOrderable Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.4ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 13.5ms | Allocations: 1418)
+  Rendered cart/_cart.html.erb (Duration: 18.8ms | Allocations: 2102)
+Completed 200 OK in 55ms (Views: 19.3ms | ActiveRecord: 14.8ms | Allocations: 4938)
+
+
+Started POST "/cart/add" for 127.0.0.1 at 2024-03-02 05:28:35 +0700
+Processing by CartController#add as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "id"=>"2", "quantity"=>"1", "commit"=>"AVAILABLE IN CART"}
+  [1m[36mCart Load (0.2ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:7:in `add'
+  [1m[36mOrderable Load (0.2ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ? AND "orderables"."product_id" = ? LIMIT ?[0m  [["cart_id", 2], ["product_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:9:in `add'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:15:in `add'
+  [1m[36mOrderable Create (0.8ms)[0m  [1m[32mINSERT INTO "orderables" ("product_id", "cart_id", "quantity", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["product_id", 2], ["cart_id", 2], ["quantity", 1], ["created_at", "2024-03-01 22:28:35.360160"], ["updated_at", "2024-03-01 22:28:35.360160"]]
+  ↳ app/controllers/cart_controller.rb:15:in `add'
+  [1m[36mTRANSACTION (7.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:15:in `add'
+Redirected to http://127.0.0.1:3000/cart/add
+Completed 302 Found in 27ms (ActiveRecord: 8.9ms | Allocations: 4118)
+
+
+Started GET "/cart/add" for 127.0.0.1 at 2024-03-02 05:28:35 +0700
+  
+ActionController::RoutingError (No route matches [GET] "/cart/add"):
+  
+Started GET "/" for 127.0.0.1 at 2024-03-02 05:28:35 +0700
+Processing by ProductsController#index as HTML
+  [1m[36mCart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  Rendering layout layouts/application.html.erb
+  Rendering products/index.html.erb within layouts/application
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/views/products/index.html.erb:5
+  [1m[36mOrderable Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.1ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 9.9ms | Allocations: 3740)
+  Rendered cart/_cart.html.erb (Duration: 10.9ms | Allocations: 4107)
+  Rendered products/index.html.erb within layouts/application (Duration: 30.9ms | Allocations: 18526)
+  Rendered layout layouts/application.html.erb (Duration: 35.5ms | Allocations: 20691)
+Completed 200 OK in 38ms (Views: 35.3ms | ActiveRecord: 1.0ms | Allocations: 21625)
+
+
+Started POST "/cart/add" for 127.0.0.1 at 2024-03-02 05:28:38 +0700
+Processing by CartController#add as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "id"=>"4", "quantity"=>"1", "commit"=>"ADD TO CART"}
+  [1m[36mCart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:7:in `add'
+  [1m[36mOrderable Load (0.2ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ? AND "orderables"."product_id" = ? LIMIT ?[0m  [["cart_id", 2], ["product_id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:9:in `add'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:15:in `add'
+  [1m[36mOrderable Create (0.3ms)[0m  [1m[32mINSERT INTO "orderables" ("product_id", "cart_id", "quantity", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["product_id", 4], ["cart_id", 2], ["quantity", 1], ["created_at", "2024-03-01 22:28:38.435579"], ["updated_at", "2024-03-01 22:28:38.435579"]]
+  ↳ app/controllers/cart_controller.rb:15:in `add'
+  [1m[36mTRANSACTION (15.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:15:in `add'
+Redirected to http://127.0.0.1:3000/cart/add
+Completed 302 Found in 31ms (ActiveRecord: 16.4ms | Allocations: 4096)
+
+
+Started GET "/cart/add" for 127.0.0.1 at 2024-03-02 05:28:38 +0700
+  
+ActionController::RoutingError (No route matches [GET] "/cart/add"):
+  
+Started GET "/" for 127.0.0.1 at 2024-03-02 05:28:38 +0700
+Processing by ProductsController#index as HTML
+  [1m[36mCart Load (0.2ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  Rendering layout layouts/application.html.erb
+  Rendering products/index.html.erb within layouts/application
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/views/products/index.html.erb:5
+  [1m[36mOrderable Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.1ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 18.7ms | Allocations: 5950)
+  Rendered cart/_cart.html.erb (Duration: 19.5ms | Allocations: 6317)
+  Rendered products/index.html.erb within layouts/application (Duration: 40.9ms | Allocations: 20730)
+  Rendered layout layouts/application.html.erb (Duration: 45.2ms | Allocations: 22886)
+Completed 200 OK in 50ms (Views: 45.4ms | ActiveRecord: 1.0ms | Allocations: 23838)
+
+
+Started POST "/cart/497/add_quantity" for 127.0.0.1 at 2024-03-02 05:28:40 +0700
+Processing by CartController#add_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"+", "id"=>"497"}
+  [1m[36mCart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.1ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 497], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:22:in `add_quantity'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mCACHE Cart Load (0.0ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Update (0.3ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 2], ["updated_at", "2024-03-01 22:28:40.117407"], ["id", 497]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mTRANSACTION (7.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.2ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 15.8ms | Allocations: 5789)
+  Rendered cart/_cart.html.erb (Duration: 18.6ms | Allocations: 6477)
+Completed 200 OK in 39ms (Views: 18.6ms | ActiveRecord: 8.7ms | Allocations: 11321)
+
+
+Started POST "/cart/497/add_quantity" for 127.0.0.1 at 2024-03-02 05:28:40 +0700
+Processing by CartController#add_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"+", "id"=>"497"}
+  [1m[36mCart Load (0.4ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.4ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 497], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:22:in `add_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mCACHE Cart Load (0.0ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Update (0.6ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 3], ["updated_at", "2024-03-01 22:28:40.314753"], ["id", 497]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mTRANSACTION (15.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.2ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 17.2ms | Allocations: 5787)
+  Rendered cart/_cart.html.erb (Duration: 18.7ms | Allocations: 6471)
+Completed 200 OK in 64ms (Views: 18.6ms | ActiveRecord: 18.0ms | Allocations: 11309)
+
+
+Started POST "/cart/497/add_quantity" for 127.0.0.1 at 2024-03-02 05:28:40 +0700
+Processing by CartController#add_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"+", "id"=>"497"}
+  [1m[36mCart Load (0.3ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.5ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 497], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:22:in `add_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mCACHE Cart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Update (0.4ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 4], ["updated_at", "2024-03-01 22:28:40.709232"], ["id", 497]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mTRANSACTION (7.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.2ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 17.3ms | Allocations: 5789)
+  Rendered cart/_cart.html.erb (Duration: 19.5ms | Allocations: 6473)
+Completed 200 OK in 59ms (Views: 19.2ms | ActiveRecord: 10.4ms | Allocations: 11320)
+
+
+Started POST "/cart/497/add_quantity" for 127.0.0.1 at 2024-03-02 05:28:40 +0700
+Processing by CartController#add_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"+", "id"=>"497"}
+  [1m[36mCart Load (0.4ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.4ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 497], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:22:in `add_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mCACHE Cart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Update (0.8ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 5], ["updated_at", "2024-03-01 22:28:41.005055"], ["id", 497]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mTRANSACTION (21.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.5ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 35.3ms | Allocations: 5789)
+  Rendered cart/_cart.html.erb (Duration: 40.2ms | Allocations: 6473)
+Completed 200 OK in 100ms (Views: 39.7ms | ActiveRecord: 25.3ms | Allocations: 11330)
+
+
+Started POST "/cart/497/add_quantity" for 127.0.0.1 at 2024-03-02 05:28:41 +0700
+Processing by CartController#add_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"+", "id"=>"497"}
+  [1m[36mCart Load (0.4ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.5ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 497], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:22:in `add_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mCACHE Cart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Update (1.1ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 6], ["updated_at", "2024-03-01 22:28:41.374869"], ["id", 497]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mTRANSACTION (15.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Count (0.8ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.5ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 40.1ms | Allocations: 5789)
+  Rendered cart/_cart.html.erb (Duration: 45.0ms | Allocations: 6473)
+Completed 200 OK in 106ms (Views: 44.0ms | ActiveRecord: 20.0ms | Allocations: 11317)
+
+
+Started POST "/cart/497/reduce_quantity" for 127.0.0.1 at 2024-03-02 05:28:43 +0700
+Processing by CartController#reduce_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"-", "id"=>"497"}
+  [1m[36mCart Load (0.3ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.5ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 497], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:30:in `reduce_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mCACHE Cart Load (0.0ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mOrderable Update (0.5ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 5], ["updated_at", "2024-03-01 22:28:43.094364"], ["id", 497]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mTRANSACTION (7.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mOrderable Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.1ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 13.6ms | Allocations: 5789)
+  Rendered cart/_cart.html.erb (Duration: 15.0ms | Allocations: 6477)
+Completed 200 OK in 48ms (Views: 14.6ms | ActiveRecord: 9.6ms | Allocations: 11313)
+
+
+Started POST "/cart/497/reduce_quantity" for 127.0.0.1 at 2024-03-02 05:28:43 +0700
+Processing by CartController#reduce_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"-", "id"=>"497"}
+  [1m[36mCart Load (0.3ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.4ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 497], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:30:in `reduce_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mCACHE Cart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mOrderable Update (1.2ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 4], ["updated_at", "2024-03-01 22:28:43.263894"], ["id", 497]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mTRANSACTION (8.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mOrderable Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.4ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 31.4ms | Allocations: 5787)
+  Rendered cart/_cart.html.erb (Duration: 35.1ms | Allocations: 6471)
+Completed 200 OK in 87ms (Views: 34.1ms | ActiveRecord: 12.7ms | Allocations: 11323)
+
+
+Started POST "/cart/497/reduce_quantity" for 127.0.0.1 at 2024-03-02 05:28:43 +0700
+Processing by CartController#reduce_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"-", "id"=>"497"}
+  [1m[36mCart Load (0.4ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.5ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 497], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:30:in `reduce_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mCACHE Cart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mOrderable Update (0.8ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 3], ["updated_at", "2024-03-01 22:28:43.590009"], ["id", 497]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mTRANSACTION (8.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mOrderable Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.6ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 40.6ms | Allocations: 5790)
+  Rendered cart/_cart.html.erb (Duration: 46.0ms | Allocations: 6474)
+Completed 200 OK in 93ms (Views: 45.6ms | ActiveRecord: 12.7ms | Allocations: 11304)
+
+
+Started POST "/cart/498/reduce_quantity" for 127.0.0.1 at 2024-03-02 05:28:45 +0700
+Processing by CartController#reduce_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"-", "id"=>"498"}
+  [1m[36mCart Load (0.3ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.3ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 498], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:30:in `reduce_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:35:in `reduce_quantity'
+  [1m[36mOrderable Destroy (0.8ms)[0m  [1m[31mDELETE FROM "orderables" WHERE "orderables"."id" = ?[0m  [["id", 498]]
+  ↳ app/controllers/cart_controller.rb:35:in `reduce_quantity'
+  [1m[36mTRANSACTION (7.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:35:in `reduce_quantity'
+  [1m[36mOrderable Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.1ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 11.6ms | Allocations: 3684)
+  Rendered cart/_cart.html.erb (Duration: 13.6ms | Allocations: 4368)
+Completed 200 OK in 38ms (Views: 13.5ms | ActiveRecord: 9.8ms | Allocations: 7210)
+
+
+Started POST "/cart/remove" for 127.0.0.1 at 2024-03-02 05:28:47 +0700
+Processing by CartController#remove as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "id"=>"497", "commit"=>"x"}
+  [1m[36mCart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.1ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 497], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:41:in `remove'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:42:in `remove'
+  [1m[36mOrderable Destroy (0.3ms)[0m  [1m[31mDELETE FROM "orderables" WHERE "orderables"."id" = ?[0m  [["id", 497]]
+  ↳ app/controllers/cart_controller.rb:42:in `remove'
+  [1m[36mTRANSACTION (7.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:42:in `remove'
+  [1m[36mOrderable Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.2ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 2]]
+  ↳ app/models/cart.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 4.8ms | Allocations: 1417)
+  Rendered cart/_cart.html.erb (Duration: 6.4ms | Allocations: 2101)
+Completed 200 OK in 22ms (Views: 6.5ms | ActiveRecord: 8.3ms | Allocations: 4948)
+
+
+Started GET "/" for 127.0.0.1 at 2024-03-05 17:16:27 +0700
+  [1m[35m (1.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ProductsController#index as HTML
+  [1m[36mCart Load (0.2ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:14:in `initialize_cart'
+  [1m[36mCart Create (0.8ms)[0m  [1m[32mINSERT INTO "carts" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", "2024-03-05 10:16:27.678578"], ["updated_at", "2024-03-05 10:16:27.678578"]]
+  ↳ app/controllers/application_controller.rb:14:in `initialize_cart'
+  [1m[36mTRANSACTION (6.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:14:in `initialize_cart'
+  Rendering layout layouts/application.html.erb
+  Rendering products/index.html.erb within layouts/application
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/views/products/index.html.erb:5
+  [1m[36mOrderable Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 3]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.1ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 3]]
+  ↳ app/models/cart.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 22.7ms | Allocations: 9118)
+  Rendered cart/_cart.html.erb (Duration: 24.5ms | Allocations: 9840)
+  Rendered products/index.html.erb within layouts/application (Duration: 108.0ms | Allocations: 51057)
+  Rendered layout layouts/application.html.erb (Duration: 126.0ms | Allocations: 65429)
+Completed 200 OK in 177ms (Views: 129.6ms | ActiveRecord: 10.2ms | Allocations: 80340)
+
+
+Started POST "/cart/add" for 127.0.0.1 at 2024-03-05 17:16:29 +0700
+Processing by CartController#add as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "id"=>"2", "quantity"=>"1", "commit"=>"ADD TO CART"}
+  [1m[36mCart Load (0.8ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:7:in `add'
+  [1m[36mOrderable Load (0.4ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ? AND "orderables"."product_id" = ? LIMIT ?[0m  [["cart_id", 3], ["product_id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:9:in `add'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:15:in `add'
+  [1m[36mOrderable Create (0.4ms)[0m  [1m[32mINSERT INTO "orderables" ("product_id", "cart_id", "quantity", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["product_id", 2], ["cart_id", 3], ["quantity", 1], ["created_at", "2024-03-05 10:16:29.844990"], ["updated_at", "2024-03-05 10:16:29.844990"]]
+  ↳ app/controllers/cart_controller.rb:15:in `add'
+  [1m[36mTRANSACTION (9.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:15:in `add'
+Redirected to http://127.0.0.1:3000/cart/add
+Completed 302 Found in 40ms (ActiveRecord: 12.4ms | Allocations: 9874)
+
+
+Started GET "/cart/add" for 127.0.0.1 at 2024-03-05 17:16:31 +0700
+  
+ActionController::RoutingError (No route matches [GET] "/cart/add"):
+  
+Started GET "/" for 127.0.0.1 at 2024-03-05 17:16:31 +0700
+Processing by ProductsController#index as HTML
+  [1m[36mCart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  Rendering layout layouts/application.html.erb
+  Rendering products/index.html.erb within layouts/application
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/views/products/index.html.erb:5
+  [1m[36mOrderable Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 3]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.1ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 3]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 6.7ms | Allocations: 4834)
+  Rendered cart/_cart.html.erb (Duration: 16.9ms | Allocations: 5206)
+  Rendered products/index.html.erb within layouts/application (Duration: 30.6ms | Allocations: 19812)
+  Rendered layout layouts/application.html.erb (Duration: 33.7ms | Allocations: 21987)
+Completed 200 OK in 36ms (Views: 33.8ms | ActiveRecord: 0.6ms | Allocations: 23084)
+
+
+Started POST "/cart/add" for 127.0.0.1 at 2024-03-05 17:16:34 +0700
+Processing by CartController#add as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "id"=>"3", "quantity"=>"1", "commit"=>"ADD TO CART"}
+  [1m[36mCart Load (0.3ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:7:in `add'
+  [1m[36mOrderable Load (0.3ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ? AND "orderables"."product_id" = ? LIMIT ?[0m  [["cart_id", 3], ["product_id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:9:in `add'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:15:in `add'
+  [1m[36mOrderable Create (0.5ms)[0m  [1m[32mINSERT INTO "orderables" ("product_id", "cart_id", "quantity", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["product_id", 3], ["cart_id", 3], ["quantity", 1], ["created_at", "2024-03-05 10:16:34.239162"], ["updated_at", "2024-03-05 10:16:34.239162"]]
+  ↳ app/controllers/cart_controller.rb:15:in `add'
+  [1m[36mTRANSACTION (7.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:15:in `add'
+Redirected to http://127.0.0.1:3000/cart/add
+Completed 302 Found in 30ms (ActiveRecord: 9.1ms | Allocations: 4212)
+
+
+Started GET "/cart/add" for 127.0.0.1 at 2024-03-05 17:16:34 +0700
+  
+ActionController::RoutingError (No route matches [GET] "/cart/add"):
+  
+Started GET "/" for 127.0.0.1 at 2024-03-05 17:16:34 +0700
+Processing by ProductsController#index as HTML
+  [1m[36mCart Load (0.3ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  Rendering layout layouts/application.html.erb
+  Rendering products/index.html.erb within layouts/application
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products"[0m
+  ↳ app/views/products/index.html.erb:5
+  [1m[36mOrderable Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 3]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.1ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 3]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 9.7ms | Allocations: 5950)
+  Rendered cart/_cart.html.erb (Duration: 10.2ms | Allocations: 6317)
+  Rendered products/index.html.erb within layouts/application (Duration: 20.6ms | Allocations: 20737)
+  Rendered layout layouts/application.html.erb (Duration: 24.2ms | Allocations: 22893)
+Completed 200 OK in 29ms (Views: 24.1ms | ActiveRecord: 1.1ms | Allocations: 23821)
+
+
+Started POST "/cart/499/add_quantity" for 127.0.0.1 at 2024-03-05 17:16:36 +0700
+Processing by CartController#add_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"+", "id"=>"499"}
+  [1m[36mCart Load (0.4ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.6ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 499], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:22:in `add_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mCACHE Cart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Update (0.5ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 2], ["updated_at", "2024-03-05 10:16:36.335132"], ["id", 499]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mTRANSACTION (7.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 3]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.1ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 3]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.2ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 19.8ms | Allocations: 6043)
+  Rendered cart/_cart.html.erb (Duration: 23.3ms | Allocations: 6897)
+Completed 200 OK in 66ms (Views: 25.5ms | ActiveRecord: 10.0ms | Allocations: 13558)
+
+
+Started POST "/cart/499/add_quantity" for 127.0.0.1 at 2024-03-05 17:16:36 +0700
+Processing by CartController#add_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"+", "id"=>"499"}
+  [1m[36mCart Load (0.3ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.3ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 499], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:22:in `add_quantity'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mCACHE Cart Load (0.0ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Update (0.4ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 3], ["updated_at", "2024-03-05 10:16:36.823490"], ["id", 499]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mTRANSACTION (7.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 3]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.2ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 3]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 17.4ms | Allocations: 5790)
+  Rendered cart/_cart.html.erb (Duration: 19.9ms | Allocations: 6474)
+Completed 200 OK in 54ms (Views: 19.8ms | ActiveRecord: 9.8ms | Allocations: 11473)
+
+
+Started POST "/cart/499/add_quantity" for 127.0.0.1 at 2024-03-05 17:16:37 +0700
+Processing by CartController#add_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"+", "id"=>"499"}
+  [1m[36mCart Load (0.4ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.7ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 499], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:22:in `add_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mCACHE Cart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Update (0.8ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 4], ["updated_at", "2024-03-05 10:16:37.110717"], ["id", 499]]
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mTRANSACTION (8.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:24:in `add_quantity'
+  [1m[36mOrderable Count (0.7ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 3]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.5ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 3]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 38.8ms | Allocations: 5792)
+  Rendered cart/_cart.html.erb (Duration: 47.1ms | Allocations: 6477)
+Completed 200 OK in 94ms (Views: 46.4ms | ActiveRecord: 13.4ms | Allocations: 11338)
+
+
+Started POST "/cart/499/reduce_quantity" for 127.0.0.1 at 2024-03-05 17:16:38 +0700
+Processing by CartController#reduce_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"-", "id"=>"499"}
+  [1m[36mCart Load (0.4ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.3ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 499], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:30:in `reduce_quantity'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mCACHE Cart Load (0.0ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mOrderable Update (0.5ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 3], ["updated_at", "2024-03-05 10:16:38.089144"], ["id", 499]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mTRANSACTION (7.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mOrderable Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 3]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.2ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 3]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.1ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 15.9ms | Allocations: 5790)
+  Rendered cart/_cart.html.erb (Duration: 17.7ms | Allocations: 6474)
+Completed 200 OK in 54ms (Views: 17.6ms | ActiveRecord: 10.1ms | Allocations: 11325)
+
+
+Started POST "/cart/499/reduce_quantity" for 127.0.0.1 at 2024-03-05 17:16:38 +0700
+Processing by CartController#reduce_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"-", "id"=>"499"}
+  [1m[36mCart Load (0.3ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.5ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 499], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:30:in `reduce_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mCACHE Cart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mOrderable Update (0.8ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 2], ["updated_at", "2024-03-05 10:16:38.421224"], ["id", 499]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mTRANSACTION (8.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mOrderable Count (0.6ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 3]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.6ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 3]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.4ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 54.3ms | Allocations: 5790)
+  Rendered cart/_cart.html.erb (Duration: 59.5ms | Allocations: 6475)
+Completed 200 OK in 111ms (Views: 59.0ms | ActiveRecord: 12.6ms | Allocations: 11306)
+
+
+Started POST "/cart/499/reduce_quantity" for 127.0.0.1 at 2024-03-05 17:16:38 +0700
+Processing by CartController#reduce_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"-", "id"=>"499"}
+  [1m[36mCart Load (0.4ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.3ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 499], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:30:in `reduce_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mCACHE Cart Load (0.1ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mOrderable Update (1.0ms)[0m  [1m[33mUPDATE "orderables" SET "quantity" = ?, "updated_at" = ? WHERE "orderables"."id" = ?[0m  [["quantity", 1], ["updated_at", "2024-03-05 10:16:38.761901"], ["id", 499]]
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mTRANSACTION (10.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:33:in `reduce_quantity'
+  [1m[36mOrderable Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 3]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.3ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 3]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.5ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  [1m[36mProduct Load (0.6ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 40.0ms | Allocations: 5791)
+  Rendered cart/_cart.html.erb (Duration: 45.5ms | Allocations: 6480)
+Completed 200 OK in 99ms (Views: 45.1ms | ActiveRecord: 14.4ms | Allocations: 11347)
+
+
+Started POST "/cart/499/reduce_quantity" for 127.0.0.1 at 2024-03-05 17:16:39 +0700
+Processing by CartController#reduce_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"-", "id"=>"499"}
+  [1m[36mCart Load (0.3ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.3ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 499], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:30:in `reduce_quantity'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:35:in `reduce_quantity'
+  [1m[36mOrderable Destroy (0.9ms)[0m  [1m[31mDELETE FROM "orderables" WHERE "orderables"."id" = ?[0m  [["id", 499]]
+  ↳ app/controllers/cart_controller.rb:35:in `reduce_quantity'
+  [1m[36mTRANSACTION (8.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:35:in `reduce_quantity'
+  [1m[36mOrderable Count (0.5ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 3]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.4ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 3]]
+  ↳ app/models/cart.rb:6:in `total'
+  [1m[36mProduct Load (0.3ms)[0m  [1m[34mSELECT "products".* FROM "products" WHERE "products"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/models/orderable.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 25.3ms | Allocations: 3684)
+  Rendered cart/_cart.html.erb (Duration: 30.7ms | Allocations: 4368)
+Completed 200 OK in 61ms (Views: 30.8ms | ActiveRecord: 11.2ms | Allocations: 7279)
+
+
+Started POST "/cart/500/reduce_quantity" for 127.0.0.1 at 2024-03-05 17:16:40 +0700
+Processing by CartController#reduce_quantity as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "commit"=>"-", "id"=>"500"}
+  [1m[36mCart Load (0.5ms)[0m  [1m[34mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:11:in `initialize_cart'
+  [1m[36mOrderable Load (0.4ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."id" = ? LIMIT ?[0m  [["id", 500], ["LIMIT", 1]]
+  ↳ app/controllers/cart_controller.rb:30:in `reduce_quantity'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/cart_controller.rb:35:in `reduce_quantity'
+  [1m[36mOrderable Destroy (0.8ms)[0m  [1m[31mDELETE FROM "orderables" WHERE "orderables"."id" = ?[0m  [["id", 500]]
+  ↳ app/controllers/cart_controller.rb:35:in `reduce_quantity'
+  [1m[36mTRANSACTION (7.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/cart_controller.rb:35:in `reduce_quantity'
+  [1m[36mOrderable Count (0.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 3]]
+  ↳ app/views/cart/_orderables.html.erb:1
+  [1m[36mOrderable Load (0.1ms)[0m  [1m[34mSELECT "orderables".* FROM "orderables" WHERE "orderables"."cart_id" = ?[0m  [["cart_id", 3]]
+  ↳ app/models/cart.rb:6:in `total'
+  Rendered cart/_orderables.html.erb (Duration: 4.5ms | Allocations: 1418)
+  Rendered cart/_cart.html.erb (Duration: 6.3ms | Allocations: 2102)
+Completed 200 OK in 33ms (Views: 6.3ms | ActiveRecord: 9.9ms | Allocations: 4935)
+
+
